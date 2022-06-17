@@ -14,6 +14,7 @@ function generatePassword() {
   var addNumbers = true;
   var addSpecialChars = true;
   var password = '';
+  var randomCharacter = true;
 
   //Prompt for length
   passwordLength = getPasswordLength();  
@@ -35,7 +36,7 @@ function generatePassword() {
   //Prompt for includeNumbers (if yes, add one number now & subtract 1 from the length)
   addNumbers = userPreference('number');
   if(addNumbers) {
-    password += generateNumber(9);
+    password += generateNumber(10);
     passwordLength -= 1;
   }
 
@@ -46,7 +47,59 @@ function generatePassword() {
     passwordLength -= 1;
   }
 
+  if(!addUpperCase && !addLowerCase && !addNumbers && !addSpecialChars) {
+    return "I really don't think you understand what the purpose of this tool is.";
+  }
+
   //Generate rest of password
+  for(var i = 0; i < passwordLength; i++) {
+    randomCharacter = generateNumber(4) + 1;
+    switch(randomCharacter) {
+      case 1:
+        if(addUpperCase) {
+          password += returnUpperCasedCharacter(generateNumber(upperCasedCharacters.length));
+        } else if(addLowerCase) {
+            password += returnLowerCasedCharacter(generateNumber(lowerCasedCharacters.length));
+        } else if(addNumbers) {
+            password += generateNumber(10);
+        } else {
+            password += returnSpecialCharacter(generateNumber(specialCharacters.length));
+        }
+        break;
+      case 2:
+        if(addLowerCase) {
+          password += returnLowerCasedCharacter(generateNumber(lowerCasedCharacters.length));
+        } else if(addNumbers) {
+            password += generateNumber(10);
+        } else if(addSpecialChars) {
+            password += returnSpecialCharacter(generateNumber(specialCharacters.length));
+        } else {
+            password += returnUpperCasedCharacter(generateNumber(upperCasedCharacters.length));
+        }
+        break;
+      case 3:
+        if(addNumbers) {
+          password += generateNumber(10);
+        } else if(addSpecialChars) {
+            password += returnSpecialCharacter(generateNumber(specialCharacters.length));
+        } else if(addUpperCase) {
+            password += returnUpperCasedCharacter(generateNumber(upperCasedCharacters.length));
+        } else {
+          password += returnLowerCasedCharacter(generateNumber(lowerCasedCharacters.length));
+        }
+        break;
+      default:
+        if(addSpecialChars) {
+          password += returnSpecialCharacter(generateNumber(specialCharacters.length));
+        } else if(addUpperCase) {
+            password += returnUpperCasedCharacter(generateNumber(upperCasedCharacters.length));
+        } else if(addLowerCase) {
+          password += returnLowerCasedCharacter(generateNumber(lowerCasedCharacters.length));
+        } else {
+            password += generateNumber(10);
+        }
+    }
+  }
   
   //Create Functions
   function getPasswordLength() {

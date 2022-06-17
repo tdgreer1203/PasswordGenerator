@@ -102,6 +102,7 @@ function generatePassword() {
   }
   
   //Create Functions
+  //I used functions for the prompts so I could just recall the function when needed, and did not have to worry with a 'while' loop
   function getPasswordLength() {
     var length = window.prompt('Please enter the password length (a number from 8 - 128)');
     if(length < 8 || length > 128 || isNaN(length)) {

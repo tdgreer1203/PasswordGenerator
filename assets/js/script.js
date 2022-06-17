@@ -44,20 +44,32 @@ function generatePassword() {
   }
 
   function scramblePassword(password) {
+    password = password.split('');
+    var length = password.length;
+    var tempChar = '';
+    var randomNumber = null;
 
+    for(var i = 0; i < length; i++) {
+      randomNumber = generateNumber(length);
+      tempChar = password[i];
+      password[i] = password[randomNumber];
+      password[randomNumber] = tempChar;
+    }
+
+    return password.join('');
   }
+
+  return password;
 }
 
 // Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+var generateBtn = document.getElementById("generate");
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
+  var passwordText = document.getElementById('password');
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button

@@ -47,11 +47,12 @@ function generatePassword() {
     passwordLength -= 1;
   }
 
+  //Error checking to see if the user declined all character types. 
   if(!addUpperCase && !addLowerCase && !addNumbers && !addSpecialChars) {
     return "I really don't think you understand what the purpose of this tool is.";
   }
 
-  //Generate rest of password
+  //Generate rest of password by adding the number of remaining characters to the password string.
   for(var i = 0; i < passwordLength; i++) {
     randomCharacter = generateNumber(4) + 1;
     switch(randomCharacter) {
@@ -113,6 +114,7 @@ function generatePassword() {
     }
   }
 
+  //Prompts the user for the current character choice. Continues prompting until a valid vlaue is entered.
   function userPreference(currentChoice) {
     var answer = window.prompt('Would you like ' + currentChoice + ' characters in the password (please enter "Yes" or "No")?');
     if(!acceptableAnswer(answer)) {
@@ -127,6 +129,7 @@ function generatePassword() {
     }
   }
 
+  //Returns the boolean value of the user's choice
   function acceptableAnswer(answer) {
     for(var i = 0; i < acceptableAnswers.length; i++) {
       if(answer === acceptableAnswers[i]){
@@ -136,6 +139,7 @@ function generatePassword() {
     return false;
   }
 
+  //Each of these functions return a character from their respective strings. 
   function generateNumber(max) {
     return Math.floor(Math.random() * max);
   }
@@ -152,6 +156,7 @@ function generatePassword() {
     return specialCharacters.charAt(index);
   }
 
+  //A function that scrambles the characters in the password (converts the string to a char array, and then reconstructs it before returning). 
   function scramblePassword(password) {
     password = password.split('');
     var length = password.length;

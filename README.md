@@ -12,7 +12,7 @@ The purpose of this assignement is to design a password generator that generates
 
 ## Website
 
-Website will go here
+https://tdgreer1203.github.io/PasswordGenerator/
 
 ## Contribution
 
